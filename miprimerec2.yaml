@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Plantilla para crear una instancia EC2 sin parámetros"
+Resources:
+  EC2Instance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      InstanceType: "t2.micro"
+      KeyName: "vockey"
+      ImageId: "ami-0c02fb55956c7d316"
+      
+  
