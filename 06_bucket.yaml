@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Plantilla para crear un bucket S3 cuyo nombre es especificado por el usuario"
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: "Nombre del bucket S3 que se va a crear"
+    Default: "miprimerbucket"    
+
+Resources:
+  S3Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: !Ref BucketName
+      Tags:
+        - Key: "Name"
+          Value: !Ref BucketName
+
+Outputs:
+  BucketName:
+    Description: "Nombre del bucket creado"
+    Value: !Ref S3Bucket
+    Export:
+      Name: "BucketNameExport"
