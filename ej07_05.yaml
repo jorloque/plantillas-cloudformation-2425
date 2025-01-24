@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyEC2Alarm:
+    Type: 'AWS::CloudWatch::Alarm'
+    Properties:
+      AlarmName: 'HighCPUUsageAlarm'
+      ComparisonOperator: 'GreaterThanThreshold'
+      EvaluationPeriods: '1'
+      MetricName: 'CPUUtilization'
+      Namespace: 'AWS/EC2'
+      Period: '300'  # 5 minutos
+      Statistic: 'Average'
+      Threshold: '80'  # Umbral del 80% de CPU
+      AlarmDescription: 'Alarma para monitorear el uso de CPU superior al 80%'
+      Dimensions:
+        - Name: 'InstanceId'
+          Value: !Ref MyEC2Instance
+      InsufficientDataActions: []
+      Unit: 'Percent'
+
+  MyEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: 't2.micro'
+      ImageId: 'ami-0c02fb55956c7d316'  # Reemplaza con la ID de imagen de EC2 que estés usando
+      KeyName: 'vockey'  # Nombre de tu par de llaves
