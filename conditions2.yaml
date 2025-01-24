@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+
+  Environment:
+    Description: Defines environment type
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - qa
+      - beta
+      - prod
+    ConstraintDescription: Use valid environment [dev, qa, beta, prod]
+
+Conditions:
+  IsProd: !Equals [ !Ref Environment, prod ]
+
+Resources:
+  Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      Tags:
+        - Key: "environment"
+          Value: !If [IsProd, "production", "non production"]
+
+Outputs:
+
+  BucketName:
+    Condition: IsProd
+    Value: !Ref Bucket
+    Description: Bucket name

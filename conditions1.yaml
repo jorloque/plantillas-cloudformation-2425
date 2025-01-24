@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+
+  Environment:
+    Description: Defines environment type
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - qa
+      - beta
+      - prod
+    ConstraintDescription: Use valid environment [dev, qa, beta, prod]
+
+Conditions:
+  IsProd: !Equals [ !Ref Environment, prod ]
+  IsLab: !Or [ !Equals [ dev, !Ref Environment ], !Equals [ qa, !Ref Environment ], !Equals [ beta, !Ref Environment ] ]
+  IsLab2: !Not [ !Equals [ prod, !Ref Environment ] ]
+  IsLab3: !Not [ !Condition IsProd ]
+
+Resources:
+  ProdBucket:
+    Type: 'AWS::S3::Bucket'
+    Condition: IsProd
+  LabBucket:
+    Type: 'AWS::S3::Bucket'
+    Condition: IsLab
+    #Condition: IsLab2
+    #Condition: IsLab3
