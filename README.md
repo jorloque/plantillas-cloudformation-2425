@@ -19,5 +19,17 @@ Añadimos una subred privada y un nat gateway para que el ec2 de la subredprivad
 - <b><u>06_bucket.yaml</u></b>
 Creación de un bucket por plantilla
 
-- <b><u>10-11-12.yml</u></b>
+- <b><u>10-11-12.yaml</u></b>
 Plantilla para crear una arquitectura para una webapp con una BBDD
+
+- <b><u>conditions1.yaml</u></b>
+Plantilla para explicar las condiciones 
+
+- <b><u>conditions2.yaml</u></b>
+Plantilla para explicar las condiciones
+
+- <b><u>maps1.yaml</u></b>
+Plantilla para explicar los mapeos
+
+- <b><u>rules1.yaml</u></b>
+Plantilla para explicar las reglas
